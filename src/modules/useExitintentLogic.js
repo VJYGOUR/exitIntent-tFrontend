@@ -3,42 +3,59 @@ import { useEffect, useState } from "react";
 function useExitIntent() {
   const [popup, setPopup] = useState(false);
   const [popupShownOnce, setPopupShownOnce] = useState(false);
+  useEffect(
+    function () {
+      const isMobile = window.innerWidth < 768;
 
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
+      const handleMobilePopState = (event) => {
+        if (
+          event.state &&
+          event.state.page === "exit-popup-trap" &&
+          !popupShownOnce
+        ) {
+          setPopup(true);
+          setPopupShownOnce(true);
+          window.history.pushState(
+            { page: "exit-popup-trap" },
+            "",
+            window.location.href
+          );
+        }
+      };
 
-    const handleMobileBack = (event) => {
-      if (!popupShownOnce) {
-        setPopup(true);
-        setPopupShownOnce(true);
-        // Create new history entry without triggering navigation
-        window.history.pushState({ trigger: "exit-trap" }, "");
-      }
-    };
+      const handleDesktopMouseLeave = (event) => {
+        if (event.clientY <= 0 && !popupShownOnce) {
+          setPopup(true);
+          setPopupShownOnce(true);
+        }
+      };
 
-    const handleDesktopMouseLeave = (event) => {
-      if (event.clientY <= 0 && !popupShownOnce) {
-        setPopup(true);
-        setPopupShownOnce(true);
-      }
-    };
-
-    if (isMobile) {
-      // Initial history entry
-      window.history.replaceState({ trigger: "initial" }, "");
-      window.addEventListener("popstate", handleMobileBack);
-    } else {
-      document.addEventListener("mouseleave", handleDesktopMouseLeave);
-    }
-
-    return () => {
       if (isMobile) {
-        window.removeEventListener("popstate", handleMobileBack);
+        window.history.pushState(
+          { page: "exit-popup-trap" },
+          "",
+          window.location.href
+        );
+        window.addEventListener("popstate", handleMobilePopState);
       } else {
-        document.removeEventListener("mouseleave", handleDesktopMouseLeave);
+        document.documentElement.addEventListener(
+          "mouseleave",
+          handleDesktopMouseLeave
+        );
       }
-    };
-  }, [popupShownOnce]);
+      return () => {
+        if (isMobile) {
+          window.removeEventListener("popstate", handleMobilePopState);
+        } else {
+          document.documentElement.removeEventListener(
+            "mouseleave",
+            handleDesktopMouseLeave
+          );
+        }
+      };
+    },
+    [popupShownOnce]
+  );
 
   return [popup, () => setPopup(false)];
 }
