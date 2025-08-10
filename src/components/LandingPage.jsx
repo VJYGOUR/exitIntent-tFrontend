@@ -7,7 +7,10 @@ const LandingPage = () => {
     <div className="landing-page-container">
       <header className="hero-section">
         <div className="hero-content">
-          <h1>Your Dream Portfolio. Just $2.</h1>
+          <h1>
+            Your Dream Portfolio. Just{" "}
+            <span className="text-[#ff4500] font-[900]">$2</span>
+          </h1>
           <p>
             Stop designing. Start impressing. Get a stunning portfolio template
             for less than your morning coffee.
