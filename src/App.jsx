@@ -1,12 +1,26 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { useUserStore } from "./store/userStore";
 import AdminData from "./components/AdminData";
 import { useEffect } from "react";
 import axiosInstance from "./api/axios";
 
+// ✅ Helper to send pageviews to GA
+const sendPageview = (url) => {
+  if (window.gtag) {
+    window.gtag("config", "G-KXX883DN7Q", {
+      page_path: url,
+    });
+  }
+};
+
 function App() {
   const { securityKeyUpdater, isAuthenticated } = useUserStore();
+  const location = useLocation();
+  // ✅ Track route changes for Google Analytics
+  useEffect(() => {
+    sendPageview(location.pathname + location.search);
+  }, [location]);
   useEffect(() => {
     async function fetchData() {
       try {
