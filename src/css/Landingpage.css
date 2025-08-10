@@ -36,7 +36,6 @@ body {
 }
 
 .cta-button {
-  display: inline-block;
   background-color: #ff4500;
   color: #fff;
   padding: 15px 30px; /* Adjusted padding for mobile */

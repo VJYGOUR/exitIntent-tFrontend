@@ -1,6 +1,8 @@
 import "../css/Landingpage.css"; // Make sure this CSS file is in the same directory
+import { useUserStore } from "../store/userStore";
 
 const LandingPage = () => {
+  const { setIsOpen, isOpen } = useUserStore();
   return (
     <div className="landing-page-container">
       <header className="hero-section">
@@ -12,12 +14,19 @@ const LandingPage = () => {
           </p>
           <a
             href="https://linkly.link/2D1df"
-            className="cta-button"
+            className="cta-button inline-block"
             target="_blank"
             rel="noopener noreferrer"
           >
             Get the Template for just $3
           </a>
+          <button
+            onClick={setIsOpen}
+            disabled={isOpen}
+            className="cta-button mx-auto mt-10 block cursor-pointer"
+          >
+            I'm not buying because...
+          </button>
         </div>
       </header>
 

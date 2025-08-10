@@ -5,6 +5,7 @@ export const useUserStore = create((set) => ({
   isAuthenticated: false,
   securityKey: "",
   adminbtn: false,
+  isOpen:false,
 
   //actions
   securityKeyUpdater: (data) => {
@@ -21,4 +22,5 @@ export const useUserStore = create((set) => ({
 
   authenticate: () => set({ isAuthenticated: true }),
   logout: () => set({ isAuthenticated: false }),
+  setIsOpen:()=>set((state)=>({isOpen:state.isOpen?false:true}))
 }));

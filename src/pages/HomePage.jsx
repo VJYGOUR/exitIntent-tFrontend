@@ -5,13 +5,12 @@ import Popup from "../components/Popup";
 import AdminButton from "../components/AdminButton";
 
 function HomePage() {
-  const [popup] = useExitIntent();
   return (
     <>
       <div className="relative h-screen">
         <LandingPage />
         <Popup />
-        {popup && <FeedbackForm />}
+        <FeedbackForm />
         <AdminButton />
       </div>
     </>

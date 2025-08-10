@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import ThankyouModal from "./ThankyouModal";
 import axiosInstance from "../api/axios";
 
+import { useUserStore } from "../store/userStore";
+
 function FeedbackForm() {
-  const [isOpen, setIsOpen] = useState(true); // Start open
+  const { isOpen, setIsOpen } = useUserStore();
+  // Start open
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
@@ -16,7 +19,7 @@ function FeedbackForm() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axiosInstance.post("/api/feedback", {
+      await axiosInstance.post("/api/feedback", {
         checkbox: data.reason, // this will be an array
       });
 
