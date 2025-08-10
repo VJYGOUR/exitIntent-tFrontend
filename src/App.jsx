@@ -6,11 +6,12 @@ import { useEffect } from "react";
 import axiosInstance from "./api/axios";
 
 // ✅ Helper to send pageviews to GA
-const sendPageview = (url) => {
+const sendPageview = (path) => {
   if (window.gtag) {
-    window.gtag("config", "G-KXX883DN7Q", {
-      page_path: url,
-      page_location: window.location.href, // full URL
+    window.gtag("event", "page_view", {
+      page_path: path,
+      page_location: window.location.href,
+      page_title: document.title,
     });
   }
 };
