@@ -18,7 +18,7 @@ const LandingPage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Get the Template for just $3
+            Get the Template for just $2
           </a>
           <button
             onClick={setIsOpen}
@@ -33,7 +33,7 @@ const LandingPage = () => {
       <section className="price-comparison-section">
         <div className="price-box">
           <div className="price-tag">
-            <span className="price-amount">$3</span>
+            <span className="price-amount">$2</span>
           </div>
           <div className="value-comparison">
             <p>vs.</p>
@@ -74,14 +74,14 @@ const LandingPage = () => {
       </section>
 
       <footer className="footer-cta">
-        <h2>Ready to invest $3 in your career?</h2>
+        <h2>Ready to invest $2 in your career?</h2>
         <a
           href="https://linkly.link/2D1df"
           className="cta-button"
           target="_blank"
           rel="noopener noreferrer"
         >
-          I'm in! Get the Template for $3
+          I'm in! Get the Template for $2
         </a>
       </footer>
     </div>
