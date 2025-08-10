@@ -13,7 +13,7 @@ const Popup = () => {
   useEffect(() => {
     const showTimer = setTimeout(() => {
       setShowPopup(true);
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(showTimer);
   }, []); // 👈 Runs only once on mount
@@ -39,7 +39,7 @@ const Popup = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosInstance.post("/api/subscription/addmail", {
+      await axiosInstance.post("/api/subscription/addmail", {
         email: data.email,
       });
 
