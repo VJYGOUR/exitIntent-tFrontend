@@ -11,7 +11,7 @@ const LandingPage = () => {
             for less than your morning coffee.
           </p>
           <a
-            href="https://linkly.link/2CeIh"
+            href="https://linkly.link/2D1df"
             className="cta-button"
             target="_blank"
             rel="noopener noreferrer"
@@ -67,7 +67,7 @@ const LandingPage = () => {
       <footer className="footer-cta">
         <h2>Ready to invest $3 in your career?</h2>
         <a
-          href="https://linkly.link/2CeIh"
+          href="https://linkly.link/2D1df"
           className="cta-button"
           target="_blank"
           rel="noopener noreferrer"
