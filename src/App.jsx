@@ -10,6 +10,7 @@ const sendPageview = (url) => {
   if (window.gtag) {
     window.gtag("config", "G-KXX883DN7Q", {
       page_path: url,
+      page_location: window.location.href, // full URL
     });
   }
 };
