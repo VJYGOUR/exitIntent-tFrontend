@@ -4,6 +4,7 @@ import ThankyouModal from "./ThankyouModal";
 import axiosInstance from "../api/axios";
 
 import { useUserStore } from "../store/userStore";
+import Spinner from "./Spinner";
 
 function FeedbackForm() {
   const { isOpen, setIsOpen, loading, setIsLoading } = useUserStore();
@@ -98,9 +99,9 @@ function FeedbackForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[#ff4500] hover:bg-[#cc3700] text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 cursor-pointer"
+          className="w-full bg-[#ff4500] hover:bg-[#cc3700] text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 cursor-pointer relative px-4  focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center justify-center"
         >
-          {loading ? "submitting..." : "Submit"}
+          {loading ? <Spinner /> : "Submit"}
         </button>
       </form>
     </div>

@@ -3,6 +3,7 @@ import "../css/popup.css"; // Make sure to create this CSS file
 import { useForm } from "react-hook-form";
 import axiosInstance from "../api/axios";
 import { useUserStore } from "../store/userStore";
+import Spinner from "./Spinner";
 
 const Popup = () => {
   const { loading, setIsLoading } = useUserStore();
@@ -91,8 +92,12 @@ const Popup = () => {
             required
             {...register("email")}
           />
-          <button type="submit" disabled={loading}>
-            {loading ? "submitting...." : "YES! I WANT A COUPON"}
+          <button
+            className=" relative px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 flex items-center justify-center"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? <Spinner /> : "YES! I WANT A COUPON"}
           </button>
         </form>
         <p className="min-order">( No Minimum order amount)</p>
