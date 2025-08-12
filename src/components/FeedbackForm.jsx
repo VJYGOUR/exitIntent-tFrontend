@@ -23,6 +23,7 @@ function FeedbackForm() {
     try {
       await axiosInstance.post("/api/feedback", {
         checkbox: data.reason, // this will be an array
+        comments: data.comment,
       });
 
       setIsSubmitted(true);
@@ -88,7 +89,18 @@ function FeedbackForm() {
             value="I found a better option"
           />
         </div>
-
+        <div>
+          <label htmlFor="comments" className="block text-gray-700 mb-1">
+            Additional Comments (optional)
+          </label>
+          <textarea
+            id="comments"
+            rows={4}
+            placeholder="Tell us more..."
+            {...register("comment")}
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
         {/* Error message if none selected */}
         {errors.reason && (
           <p className="text-red-500 text-sm">
