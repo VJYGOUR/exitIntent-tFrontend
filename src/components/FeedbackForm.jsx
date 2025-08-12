@@ -26,7 +26,7 @@ function FeedbackForm() {
       setIsSubmitted(true);
       reset();
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("Submission error:", error.message);
     }
   };
 

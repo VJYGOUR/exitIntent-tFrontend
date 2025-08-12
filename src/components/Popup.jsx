@@ -46,7 +46,7 @@ const Popup = () => {
       setShowPopup(false);
       reset();
     } catch (error) {
-      console.error(`Error submiting email:`, error);
+      console.error(`Error submiting email:`, error.message);
     }
   };
 
