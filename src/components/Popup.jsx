@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../css/popup.css"; // Make sure to create this CSS file
 import { useForm } from "react-hook-form";
 import axiosInstance from "../api/axios";
+import { useUserStore } from "../store/userStore";
 
 const Popup = () => {
+  const { loading, setIsLoading } = useUserStore();
   const [minutes, setMinutes] = useState(30);
   const [seconds, setSeconds] = useState(58);
   const [showPopup, setShowPopup] = useState(false);
@@ -38,6 +40,7 @@ const Popup = () => {
   }, [showPopup, minutes, seconds]);
 
   const onSubmit = async (data) => {
+    setIsLoading();
     try {
       await axiosInstance.post("/api/subscription/addmail", {
         email: data.email,
@@ -45,6 +48,7 @@ const Popup = () => {
 
       setShowPopup(false);
       reset();
+      setIsLoading();
     } catch (error) {
       console.error(`Error submiting email:`, error.message);
     }
@@ -87,7 +91,9 @@ const Popup = () => {
             required
             {...register("email")}
           />
-          <button type="submit">YES! I WANT A COUPON</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "submitting...." : "YES! I WANT A COUPON"}
+          </button>
         </form>
         <p className="min-order">( No Minimum order amount)</p>
       </div>

@@ -6,7 +6,7 @@ import axiosInstance from "../api/axios";
 import { useUserStore } from "../store/userStore";
 
 function FeedbackForm() {
-  const { isOpen, setIsOpen } = useUserStore();
+  const { isOpen, setIsOpen, loading, setIsLoading } = useUserStore();
   // Start open
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -18,6 +18,7 @@ function FeedbackForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading();
     try {
       await axiosInstance.post("/api/feedback", {
         checkbox: data.reason, // this will be an array
@@ -25,6 +26,7 @@ function FeedbackForm() {
 
       setIsSubmitted(true);
       reset();
+      setIsLoading();
     } catch (error) {
       console.error("Submission error:", error.message);
     }
@@ -95,9 +97,10 @@ function FeedbackForm() {
 
         <button
           type="submit"
+          disabled={loading}
           className="w-full bg-[#ff4500] hover:bg-[#cc3700] text-white font-semibold py-3 rounded-xl shadow-md transition-all duration-300 cursor-pointer"
         >
-          Submit
+          {loading ? "submitting..." : "Submit"}
         </button>
       </form>
     </div>
